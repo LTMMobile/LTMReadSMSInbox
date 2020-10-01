@@ -5,13 +5,12 @@ import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickRequestPermission( View v ) {
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_SMS)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_SMS}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, 1);
         }else {
 
         }
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickButtonReadSmsInbox(View v ) {
+
         Uri message = Uri.parse("content://sms/inbox");
         ContentResolver cr = getContentResolver();
 
@@ -49,5 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(c.getColumnName(i) + "", c.getString(i) + "");
             }
         }
+
     }
 }
